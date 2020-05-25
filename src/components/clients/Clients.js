@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
+
+// Redux
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect} from 'react-redux-firebase';
 
 // Components
-import Spinner from '../layout/Spinner';
+import Spinner from '../Spinner';
 
 const Clients = ({ clients}) => {
     const [totalScore, setTotalScore] = useState(0);
@@ -51,7 +53,7 @@ const Clients = ({ clients}) => {
                     <tbody>
                         {clients
                             && clients.map(client => (
-                                <tr id={client.id}>
+                                <tr key={client.id} id={client.id}>
                                     <td>{client.firstName} {client.lastName}</td>
                                     <td>{client.email}</td>
                                     <td>{parseFloat(client.balance).toFixed(2)}</td>
