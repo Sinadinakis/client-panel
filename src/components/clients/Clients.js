@@ -16,7 +16,7 @@ const Clients = ({ clients}) => {
     useEffect(
         () => {
             if(clients) {
-                const total = clients.reduce((total, client) => {
+                const total = clients && clients.reduce((total, client) => {
                     return total + parseFloat(client.balance.toString())
                 }, 0)
 

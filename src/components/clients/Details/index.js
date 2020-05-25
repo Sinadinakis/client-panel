@@ -14,7 +14,7 @@ import Spinner from '../../Spinner';
 import ClientInfo from './ClientInfo';
 
 const ClientDetails = ({ client, history, firestore }) => {
-    const [showBalanace, setShowBalanace] = useState(false);
+    const [showBalance, setShowBalance] = useState(false);
     const [balanceAmmount, setBalanceAmmount] = useState('');
     const onSubmit = (values, { setSubmitting }) => {
         setTimeout(() => {

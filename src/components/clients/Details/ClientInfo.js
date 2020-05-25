@@ -10,11 +10,10 @@ import Icon from '../../Icon';
 import Input from '../../Input';
 
 const ClientInfo = ({ client,firestore }) => {
-    const [showBalanace, setShowBalanace] = useState(false);
+    const [showBalance, setShowBalance] = useState(false);
     const [balanceAmmount, setBalanceAmmount] = useState('');
     let balanceForm = null;
-    const onSubmit = (values, { setSubmitting }) => {
-        console.log(balanceAmmount)
+    const onSubmit = ({ setSubmitting }) => {
         let clientUpdate = {
             balance: parseFloat(balanceAmmount)
         }
@@ -23,13 +22,13 @@ const ClientInfo = ({ client,firestore }) => {
             setSubmitting(false);
         }, 400);
     }
-    if(showBalanace) {
+    if(showBalance) {
         balanceForm = (
             <Formik
             initialValues={{ balanceAmmount: '' }}
             onSubmit={onSubmit}
             >            
-                {({ values, handleChange, handleSubmit }) => {
+                {({ values, handleSubmit }) => {
                     return (
                     <form onSubmit={handleSubmit}>
                         <div className="input-group">
@@ -62,7 +61,7 @@ const ClientInfo = ({ client,firestore }) => {
             </div>
             <div className="col-md-4 col-sm-6">
                 <h3 className="pull-right">
-                    Balanace:
+                    Balance:
                     <span className={
                         clsx({
                             'text-danger': client.balance > 0,
@@ -72,7 +71,7 @@ const ClientInfo = ({ client,firestore }) => {
                         ${parseFloat(client.balance).toFixed(2)}
                     </span>
                     <small>
-                        {' '}<a href="#!" onClick={() => setShowBalanace(!showBalanace)}>
+                        {' '}<a href="#!" onClick={() => setShowBalance(!showBalance)}>
                             <Icon icon="pencil-alt" />
                         </a> 
                     </small>

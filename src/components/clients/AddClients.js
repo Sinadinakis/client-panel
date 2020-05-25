@@ -31,7 +31,7 @@ const AddClients = ({ firestore, history }) => {
 
             <Card header="Add Client">
                 <Formik
-                    initialValues={{ firstName: '', lastName: '', email: '', phone: '', balanace: 0 }}
+                    initialValues={{ firstName: '', lastName: '', email: '', phone: '', balance: 0 }}
                     onSubmit={onSubmit}
                 >
                     {({ handleChange, handleSubmit, isSubmitting }) => (
@@ -67,6 +67,7 @@ const AddClients = ({ firestore, history }) => {
                                 label="Balance"
                                 name="balance"
                                 onChange={handleChange}
+                                required
                             /> 
                             <button type="submit" disabled={isSubmitting} className="btn btn-primary btn-block">
                                 Submit
