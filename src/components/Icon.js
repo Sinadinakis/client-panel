@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Icon = ({icon}) => {
+const Icon = ({ icon, rest }) => {
     return (
-        <i className={`fas fa-${icon}`} />
+        <i className={`fas fa-${icon}`} {...rest}/>
     )
 }
 

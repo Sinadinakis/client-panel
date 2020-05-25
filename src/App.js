@@ -8,7 +8,7 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import AppNavbar from './components/layout/AppNavbar';
 import Dashboard from './components/layout/Dashboard';
 import AddClient from './components/clients/AddClients';
-import DetailsClient from './components/clients/DetailsClient';
+import ClientDetails from './components/clients/Details';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
               <Switch>
                 <Route exact path="/" component={Dashboard} />
                 <Route exact path="/client/add" component={AddClient} />
-                <Route exact path="/client/:id" component={DetailsClient} />
+                <Route exact path="/client/:id" component={ClientDetails} />
               </Switch>
             </div>
           </div>
