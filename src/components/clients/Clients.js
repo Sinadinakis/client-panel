@@ -1,15 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-const Clients = () => {
-    const clients = [{
-        id: '232432432',
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'jdoe@gmail.com',
-        phone: '555-555-555',
-        balance: '100.0'
-    }
-    ]
+import PropTypes from 'prop-types'
+
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect} from 'react-redux-firebase';
+import Spinner from '../layout/Spinner';
+
+const Clients = ({ clients}) => {
+    const [totalScore, setTotalScore] = useState(0);
+
+    useEffect(
+        () => {
+            if(clients) {
+                const total = clients.reduce((total, client) => {
+                    return total + parseFloat(client.balance.toString())
+                }, 0)
+
+                setTotalScore(total)
+            }
+        }, [clients]
+    )
 
     if (clients) {
         return (
@@ -19,6 +30,12 @@ const Clients = () => {
                         <i className="fas fa-users" /> Clients{' '}
                     </div>
                     <div className="col-md-6">
+                        <h5 className="text-right text-secondary">
+                            Total Balance {' '}
+                            <span className="text-primary">
+                                ${parseFloat(totalScore.toFixed(2))}
+                            </span>
+                        </h5>
                     </div>
                 </div>
                 <table className="table table-striped">
@@ -39,7 +56,7 @@ const Clients = () => {
                                     <td>{parseFloat(client.balance).toFixed(2)}</td>
                                     <td>
                                         <Link to={`/client/${client.id}`} className="btn btn-secondary btn-sm">
-                                         <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Details
+                                         <i className="fa fa-arrow-circle-right" aria-hidden="true"></i> Details
                                          </Link>
                                     </td>
                                 </tr>
@@ -49,8 +66,19 @@ const Clients = () => {
             </div>
         )
     } else {
-        return <h1>Loading..</h1>
+        return <Spinner />
     }
 }
 
-export default Clients;
+Clients.propTypes = {
+    firestore: PropTypes.object.isRequired,
+    clients: PropTypes.array
+}
+
+export default compose(
+    firestoreConnect([{ collection: 'clients'}]),
+    connect((state,props) => ({
+        clients: state.firestore.ordered.clients
+    })
+    )
+)(Clients);
