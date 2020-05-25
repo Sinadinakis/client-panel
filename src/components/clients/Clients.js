@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
-
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect} from 'react-redux-firebase';
+
+// Components
 import Spinner from '../layout/Spinner';
 
 const Clients = ({ clients}) => {
