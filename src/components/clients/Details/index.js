@@ -23,6 +23,10 @@ const ClientDetails = ({ client, history, firestore }) => {
         }, 400);
     }
 
+    const onDelete = () => {
+        firestore.delete({ collection: 'clients', doc: client.id }).then( () => history.push('/'))
+    }
+
     if (client) {
         return (
             <>
@@ -37,7 +41,7 @@ const ClientDetails = ({ client, history, firestore }) => {
                             <Link to={`/client/edit/${client.id}`} className="btn btn-dark">
                                 <Icon icon="edit" /> Edit
                             </Link>
-                            <button className="btn btn-danger">Delete</button>
+                            <button className="btn btn-danger" onClick={onDelete}>Delete</button>
                         </div>
                     </div>
                 </div>

@@ -31,7 +31,7 @@ const AddClients = ({ firestore, history }) => {
 
             <Card header="Add Client">
                 <Formik
-                    initialValues={{ firstName: '', lastName: '', email: '', phone: '', balance: 0 }}
+                    initialValues={{ firstName: '', lastName: '', email: '', phone: '', balance: '0' }}
                     onSubmit={onSubmit}
                 >
                     {({ handleChange, handleSubmit, isSubmitting }) => (

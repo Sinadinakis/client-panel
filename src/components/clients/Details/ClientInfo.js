@@ -13,13 +13,12 @@ const ClientInfo = ({ client,firestore }) => {
     const [showBalance, setShowBalance] = useState(false);
     const [balanceAmmount, setBalanceAmmount] = useState('');
     let balanceForm = null;
-    const onSubmit = ({ setSubmitting }) => {
+    const onSubmit = () => {
         let clientUpdate = {
             balance: parseFloat(balanceAmmount)
         }
         setTimeout(() => {
             firestore.update({ collection: 'clients', doc: client.id }, clientUpdate);
-            setSubmitting(false);
         }, 400);
     }
     if(showBalance) {
